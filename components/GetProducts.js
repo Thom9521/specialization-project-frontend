@@ -1,31 +1,35 @@
 import React, {useState, useEffect} from 'react';
 import 'react-native-gesture-handler';
 import axios from 'axios';
+import {useNavigation} from '@react-navigation/native';
 
 import {View, Text, Button, Image, StyleSheet} from 'react-native';
 
-const GetProducts = ({}) => {
+const GetProducts = () => {
+  // navigation constant from the useNavigation hook gives acces to the parent navigation object
+  const navigation = useNavigation();
+
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const fetchProducts = async () => {
-      const result = await axios(
-        `http://192.168.2.92:80/backend/api/products.php`,
-      );
+      const result = await axios(`http://192.168.2.92/api/products`);
       setProducts(result.data);
     };
     fetchProducts();
   }, []);
-
   return products.map((product, index) => {
-    const {id, name, price, imagePath, description} = product; // destructuring
+    const {ID, name, price, imagePath, description} = product; // destructuring
     return (
-      <View style={styles.container} key={id}>
+      <View style={styles.container} key={ID}>
         <Text style={styles.title}>{name}</Text>
         {/* <Text style={styles.price}>{price}$</Text> */}
         <Image source={{uri: imagePath}} style={styles.img} />
         {/* <Text style={styles.description}>{description}</Text> */}
         <Text style={styles.price}>{price}$</Text>
-        <Button title="See details" />
+        <Button
+          title="See details"
+          onPress={() => navigation.navigate('Product', {productID: ID})} // passing the ID with params
+        />
       </View>
     );
   });

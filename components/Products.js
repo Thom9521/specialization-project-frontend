@@ -1,20 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import 'react-native-gesture-handler';
-import axios from 'axios';
 import GetProducts from './GetProducts';
 
 import {View, Text, Button, StyleSheet, ScrollView} from 'react-native';
 
 const Products = ({navigation, route}) => {
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const result = await axios(`http://192.168.2.92:80/backend/api/read.php`);
-      setProducts(result.data);
-    };
-    fetchProducts();
-  }, []);
-
   return (
     <ScrollView style={styles.container}>
       <View style={styles.titleView}>
