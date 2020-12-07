@@ -8,10 +8,20 @@ const HomeScreen = ({navigation}) => {
       <View style={styles.titleView}>
         <Text style={styles.welcomeText}>Lemonade Webshop</Text>
       </View>
-      <Button
-        title="Go to products"
-        onPress={() => navigation.navigate('Products', {name: 'ProductPage'})}
-      />
+      <View style={styles.btnsView}>
+        <Button
+          title="Go to products"
+          onPress={() => navigation.navigate('Products', {name: 'ProductPage'})}
+        />
+        <Button
+          title="Go to products"
+          onPress={() => navigation.navigate('Products', {name: 'ProductPage'})}
+        />
+        <Button
+          title="Go to products"
+          onPress={() => navigation.navigate('Products', {name: 'ProductPage'})}
+        />
+      </View>
     </View>
   );
 };
@@ -25,6 +35,11 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     fontSize: 36,
+  },
+  btnsView: {
+    flex: 0.9,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

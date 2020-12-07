@@ -21,7 +21,7 @@ const GetProducts = () => {
     const {ID, name, price, imagePath, description} = product; // destructuring
     return (
       <View style={styles.container} key={ID}>
-        <Text style={styles.title}>{name}</Text>
+        <Text style={styles.name}>{name}</Text>
         {/* <Text style={styles.price}>{price}$</Text> */}
         <Image source={{uri: imagePath}} style={styles.img} />
         {/* <Text style={styles.description}>{description}</Text> */}
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
+  name: {
     fontSize: 26,
     fontWeight: 'bold',
   },

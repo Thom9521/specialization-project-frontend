@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import 'react-native-gesture-handler';
 import axios from 'axios';
 
-import {View, Text, Button, Image, StyleSheet} from 'react-native';
+import {View, Text, Button, Image, StyleSheet, Alert} from 'react-native';
 
 const GetProduct = ({navigation, productID}) => {
   const [product, setProduct] = useState({});
@@ -17,28 +17,41 @@ const GetProduct = ({navigation, productID}) => {
   }, []);
 
   return (
-    <View>
-      <Text>{product.name}</Text>
-      <Text>{product.description}</Text>
+    <View style={styles.container}>
+      <Text style={styles.name}>{product.name}</Text>
+      <Image source={{uri: product.imagePath}} style={styles.img} />
+      <Text style={styles.description}>{product.description}</Text>
+      <Button
+        title={`Buy for ${product.price}$`}
+        onPress={() => {
+          Alert.alert('Success!', `The ${product.name} was bought!`, [
+            {
+              text: 'OK',
+              onPress: () => console.log('Alert closed'),
+            },
+          ]);
+        }}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    width: 200,
-    height: 300,
+    width: '100%',
+    height: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
   },
-  title: {
-    fontSize: 26,
+  name: {
+    fontSize: 40,
     fontWeight: 'bold',
+    marginBottom: 50,
   },
   img: {
-    width: 150,
-    height: 150,
-    borderRadius: 150 / 2,
+    width: 300,
+    height: 300,
+    borderRadius: 300 / 2,
+    marginBottom: 20,
   },
   price: {
     fontSize: 20,
@@ -47,7 +60,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 16,
-    marginBottom: 5,
+    marginBottom: 50,
   },
 });
 

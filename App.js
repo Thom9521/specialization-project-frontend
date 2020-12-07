@@ -4,22 +4,31 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import HomeScreen from './components/HomeScreen';
-import Products from './components/Products';
-import Product from './components/Product';
+import Products from './components/products/Products';
+import Product from './components/product/Product';
 
+import Theme from './components/Theme';
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={Theme}>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"
           component={HomeScreen}
           options={{title: 'Welcome'}}
         />
-        <Stack.Screen name="Products" component={Products} />
-        <Stack.Screen name="Product" component={Product} />
+        <Stack.Screen
+          name="Products"
+          component={Products}
+          options={{title: 'All Products'}}
+        />
+        <Stack.Screen
+          name="Product"
+          component={Product}
+          options={{title: 'Single Product'}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

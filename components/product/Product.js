@@ -8,7 +8,7 @@ const Product = ({route, navigation}) => {
   // getting the productID from the route params so i can pass it to the child component through props
   const {productID} = route.params;
   return (
-    <View>
+    <View style={styles.container}>
       <GetProduct productID={productID} />
     </View>
   );
@@ -16,28 +16,21 @@ const Product = ({route, navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 200,
-    height: 300,
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  titleView: {
+    alignItems: 'center',
+  },
   title: {
-    fontSize: 26,
-    fontWeight: 'bold',
+    fontSize: 36,
   },
-  img: {
-    width: 150,
-    height: 150,
-    borderRadius: 150 / 2,
-  },
-  price: {
-    fontSize: 20,
-    color: '#85bb65',
-    marginBottom: 10,
-  },
-  description: {
-    fontSize: 16,
-    marginBottom: 5,
+  productsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexWrap: 'wrap',
   },
 });
 
