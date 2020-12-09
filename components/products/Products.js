@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import 'react-native-gesture-handler';
 import GetProducts from './GetProducts';
 import lemonbackground from '../../assets/lemonbackground3.png';
 

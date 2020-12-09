@@ -1,5 +1,4 @@
 import React from 'react';
-import 'react-native-gesture-handler';
 import {
   View,
   Text,
@@ -22,17 +21,15 @@ const HomeScreen = ({navigation}) => {
         <View style={styles.buttonView}>
           <TouchableOpacity
             style={styles.button}
-            onPress={() =>
-              navigation.navigate('Products', {name: 'ProductPage'})
-            }>
-            <Text style={styles.buttonText}>LOGIN</Text>
+            onPress={() => navigation.navigate('Login', {name: 'LoginPage'})}>
+            <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
             onPress={() =>
               navigation.navigate('Products', {name: 'ProductPage'})
             }>
-            <Text style={styles.buttonText}>PRODUCTS</Text>
+            <Text style={styles.buttonText}>Products</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>

@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import 'react-native-gesture-handler';
 import GetProduct from './GetProduct';
 import lemonbackground from '../../assets/lemonbackground3.png';
 
@@ -33,18 +32,6 @@ const styles = StyleSheet.create({
   backgroundImage: {
     resizeMode: 'repeat',
     width: '100%',
-  },
-  titleView: {
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 36,
-  },
-  productsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexWrap: 'wrap',
   },
 });
 

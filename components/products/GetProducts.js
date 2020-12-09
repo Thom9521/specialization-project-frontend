@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import 'react-native-gesture-handler';
 import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
 
