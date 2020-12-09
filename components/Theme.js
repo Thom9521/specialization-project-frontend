@@ -5,12 +5,12 @@ import {DefaultTheme} from '@react-navigation/native';
 const Theme = {
   dark: false,
   colors: {
-    primary: 'yellow',
-    background: 'rgb(242, 242, 242)',
-    card: 'yellow',
-    text: 'black',
-    border: 'Yellow',
-    notification: 'rgb(255, 69, 58)',
+    primary: 'yellow', // primary color of the app usedd to tunt various elements
+    background: 'white', // the color of various backgrounds, like the screen background
+    card: 'rgb(217,210,11)', // the background color of card-like elements, like header and tab bars
+    text: 'black', // text color of various elements
+    border: 'yellow', // color fo borders, like header border and tab bar border
+    notification: 'rgb(255, 69, 58)', // color of tab navigation badge
   },
 };
 

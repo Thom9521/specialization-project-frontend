@@ -6,6 +6,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './components/HomeScreen';
 import Products from './components/products/Products';
 import Product from './components/product/Product';
+// import Login from './components/auth/Login';
+// import Signup from './components/auth/Signup';
 
 import Theme from './components/Theme';
 const Stack = createStackNavigator();
@@ -29,6 +31,16 @@ const App = () => {
           component={Product}
           options={{title: 'Single Product'}}
         />
+        {/* <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{title: 'Login'}}
+        />
+        <Stack.Screen
+          name="Signup"
+          component={Signup}
+          options={{title: 'Sign Up'}}
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

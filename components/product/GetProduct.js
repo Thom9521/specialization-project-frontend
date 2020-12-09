@@ -2,7 +2,15 @@ import React, {useState, useEffect} from 'react';
 import 'react-native-gesture-handler';
 import axios from 'axios';
 
-import {View, Text, Button, Image, StyleSheet, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  Alert,
+} from 'react-native';
 
 const GetProduct = ({navigation, productID}) => {
   const [product, setProduct] = useState({});
@@ -21,8 +29,9 @@ const GetProduct = ({navigation, productID}) => {
       <Text style={styles.name}>{product.name}</Text>
       <Image source={{uri: product.imagePath}} style={styles.img} />
       <Text style={styles.description}>{product.description}</Text>
-      <Button
-        title={`Buy for ${product.price}$`}
+
+      <TouchableOpacity
+        style={styles.button}
         onPress={() => {
           Alert.alert('Success!', `The ${product.name} was bought!`, [
             {
@@ -30,8 +39,9 @@ const GetProduct = ({navigation, productID}) => {
               onPress: () => console.log('Alert closed'),
             },
           ]);
-        }}
-      />
+        }}>
+        <Text style={styles.buttonText}>Buy for {product.price}$</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -61,6 +71,18 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 16,
     marginBottom: 50,
+  },
+  button: {
+    backgroundColor: 'rgb(217,210,11)',
+    width: 130,
+    height: 40,
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: 'black',
+    fontSize: 15,
   },
 });
 

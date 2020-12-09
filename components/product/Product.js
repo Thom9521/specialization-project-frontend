@@ -1,15 +1,25 @@
 import React, {useState, useEffect} from 'react';
 import 'react-native-gesture-handler';
 import GetProduct from './GetProduct';
+import lemonbackground from '../../assets/lemonbackground3.png';
 
-import {View, Text, Button, Image, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  Image,
+  StyleSheet,
+  ImageBackground,
+} from 'react-native';
 
 const Product = ({route, navigation}) => {
   // getting the productID from the route params so i can pass it to the child component through props
   const {productID} = route.params;
   return (
     <View style={styles.container}>
-      <GetProduct productID={productID} />
+      <ImageBackground source={lemonbackground} style={styles.backgroundImage}>
+        <GetProduct productID={productID} />
+      </ImageBackground>
     </View>
   );
 };
@@ -19,6 +29,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  backgroundImage: {
+    resizeMode: 'repeat',
+    width: '100%',
   },
   titleView: {
     alignItems: 'center',

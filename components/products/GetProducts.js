@@ -3,7 +3,14 @@ import 'react-native-gesture-handler';
 import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
 
-import {View, Text, Button, Image, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Button,
+  Image,
+  StyleSheet,
+} from 'react-native';
 
 const GetProducts = () => {
   // navigation constant from the useNavigation hook gives acces to the parent navigation object
@@ -26,10 +33,13 @@ const GetProducts = () => {
         <Image source={{uri: imagePath}} style={styles.img} />
         {/* <Text style={styles.description}>{description}</Text> */}
         <Text style={styles.price}>{price}$</Text>
-        <Button
-          title="See details"
+
+        <TouchableOpacity
+          style={styles.button}
           onPress={() => navigation.navigate('Product', {productID: ID})} // passing the ID with params
-        />
+        >
+          <Text style={styles.buttonText}>SEE DETAILS</Text>
+        </TouchableOpacity>
       </View>
     );
   });
@@ -59,6 +69,18 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 16,
     marginBottom: 5,
+  },
+  button: {
+    backgroundColor: 'rgb(217,210,11)',
+    width: 150,
+    height: 40,
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: 'black',
+    fontSize: 15,
   },
 });
 
