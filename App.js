@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -12,14 +12,24 @@ import Signup from './components/auth/Signup';
 import Theme from './components/Theme';
 const Stack = createStackNavigator();
 
+import {Text} from 'react-native';
 const App = () => {
+  const [money, setMoney] = useState(50);
+
   return (
     <NavigationContainer theme={Theme}>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{title: 'Welcome'}}
+          options={{
+            title: 'Welcome',
+            headerRight: () => (
+              <Text style={{paddingRight: 20, fontSize: 20, color: '#85bb65'}}>
+                {money}$
+              </Text>
+            ),
+          }}
         />
         <Stack.Screen
           name="Products"

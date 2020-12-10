@@ -19,6 +19,26 @@ const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const formData = {email: email, password: password};
+
+  const handleSubmit = (e) => {
+    if (email != '' && password != '') {
+      e.preventDefault();
+      axios
+        .post('http://192.168.2.92/api/login', formData)
+        .then(function (response) {
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          if (error.response) {
+            console.log(error.response.data.message);
+          }
+        });
+    } else {
+      console.log('Fill in values');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground source={lemonbackground} style={styles.backgroundImage}>
@@ -31,7 +51,8 @@ const Login = ({navigation}) => {
               style={styles.inputText}
               placeholder="Email..."
               keyboardType="email-address"
-              onChange={(email) => setEmail(email)}
+              onChangeText={(email) => setEmail(email)}
+              value={email}
             />
           </View>
           <View style={styles.inputView}>
@@ -39,12 +60,13 @@ const Login = ({navigation}) => {
               style={styles.inputText}
               placeholder="Password..."
               secureTextEntry={true}
-              onChange={(password) => setPassword(password)}
+              onChangeText={(password) => setPassword(password)}
+              value={password}
             />
           </View>
         </View>
         <View style={styles.buttonView}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity
