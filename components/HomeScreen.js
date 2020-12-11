@@ -7,7 +7,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Button,
   StyleSheet,
   ImageBackground,
 } from 'react-native';
@@ -15,15 +14,13 @@ import lemonbackground from '../assets/lemonbackground3.png';
 
 const HomeScreen = ({navigation}) => {
   const [me, setMe] = useState({email: '', id: '', name: '', money: 0});
-  const [token, setToken] = useState('');
+
   const isFocused = useIsFocused();
   useEffect(() => {
     const getData = async () => {
       try {
         const value = await AsyncStorage.getItem('token');
         if (value !== null) {
-          // value previously stored
-          setToken(value);
           const headers = {
             'Content-Type': 'Application/json',
             Authorization: 'Bearer ' + value,
@@ -76,7 +73,7 @@ const HomeScreen = ({navigation}) => {
           <TouchableOpacity
             style={styles.button}
             onPress={() =>
-              navigation.navigate('Products', {name: 'ProductPage'})
+              navigation.navigate('ProductsScreen', {name: 'ProductPage'})
             }>
             <Text style={styles.buttonText}>Products</Text>
           </TouchableOpacity>

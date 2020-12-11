@@ -1,51 +1,78 @@
 import React, {useState, useEffect} from 'react';
-import GetProducts from './GetProducts';
-import lemonbackground from '../../assets/lemonbackground3.png';
+import axios from 'axios';
+import {useNavigation} from '@react-navigation/native';
 
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  ScrollView,
-  ImageBackground,
-} from 'react-native';
+import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 
-const Products = ({navigation, route}) => {
-  return (
-    <ImageBackground source={lemonbackground} style={styles.backgroundImage}>
-      <ScrollView style={styles.container}>
-        <View style={styles.titleView}>
-          <Text style={styles.title}>Products</Text>
-        </View>
-        {/* <Text>{route.params.name}</Text> */}
-        <View style={styles.productsContainer}>
-          <GetProducts />
-        </View>
-      </ScrollView>
-    </ImageBackground>
-  );
+const Products = () => {
+  // navigation constant from the useNavigation hook gives acces to the parent navigation object
+  const navigation = useNavigation();
+
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const result = await axios(`http://192.168.2.92/api/products`);
+      setProducts(result.data);
+    };
+    fetchProducts();
+  }, []);
+  return products.map((product, index) => {
+    const {ID, name, price, imagePath, description} = product; // destructuring
+    return (
+      <View style={styles.container} key={ID}>
+        <Text style={styles.name}>{name}</Text>
+        {/* <Text style={styles.price}>{price}$</Text> */}
+        <Image source={{uri: imagePath}} style={styles.img} />
+        {/* <Text style={styles.description}>{description}</Text> */}
+        <Text style={styles.price}>{price}$</Text>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('ProductScreen', {productID: ID})} // passing the ID with params
+        >
+          <Text style={styles.buttonText}>SEE DETAILS</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  });
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'repeat',
-  },
-  titleView: {
+    width: 200,
+    height: 300,
     alignItems: 'center',
-  },
-  title: {
-    fontSize: 36,
-  },
-  productsContainer: {
-    flexDirection: 'row',
     justifyContent: 'center',
+  },
+  name: {
+    fontSize: 26,
+    fontWeight: 'bold',
+  },
+  img: {
+    width: 150,
+    height: 150,
+    borderRadius: 150 / 2,
+  },
+  price: {
+    fontSize: 20,
+    color: 'green',
+    marginBottom: 10,
+  },
+  description: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  button: {
+    backgroundColor: 'rgb(217,210,11)',
+    width: 150,
+    height: 40,
+    borderRadius: 25,
     alignItems: 'center',
-    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: 'black',
+    fontSize: 15,
   },
 });
 

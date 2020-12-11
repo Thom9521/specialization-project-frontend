@@ -5,8 +5,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import HomeScreen from './components/HomeScreen';
-import Products from './components/products/Products';
-import Product from './components/product/Product';
+import ProductsScreen from './components/products/ProductsScreen';
+import ProductScreen from './components/product/ProductScreen';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 
@@ -28,13 +28,13 @@ const App = () => {
           }}
         />
         <Stack.Screen
-          name="Products"
-          component={Products}
+          name="ProductsScreen"
+          component={ProductsScreen}
           options={{title: 'All Products'}}
         />
         <Stack.Screen
-          name="Product"
-          component={Product}
+          name="ProductScreen"
+          component={ProductScreen}
           options={{title: 'Single Product'}}
         />
         <Stack.Screen
