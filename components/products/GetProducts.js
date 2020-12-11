@@ -2,14 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
 
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Button,
-  Image,
-  StyleSheet,
-} from 'react-native';
+import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 
 const GetProducts = () => {
   // navigation constant from the useNavigation hook gives acces to the parent navigation object
@@ -62,7 +55,7 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 20,
-    color: '#85bb65',
+    color: 'green',
     marginBottom: 10,
   },
   description: {

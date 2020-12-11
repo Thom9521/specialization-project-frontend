@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Dimensions} from 'react-native';
 import axios from 'axios';
 import lemonbackground from '../../assets/lemonbackground3.png';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
   View,
@@ -10,6 +11,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
+  Alert,
 } from 'react-native';
 
 var dimWidth = Dimensions.get('window').width; //full width
@@ -21,6 +23,13 @@ const Login = ({navigation}) => {
 
   const formData = {email: email, password: password};
 
+  const storeData = async (value) => {
+    try {
+      await AsyncStorage.setItem('token', value);
+    } catch (e) {
+      // saving error
+    }
+  };
   const handleSubmit = (e) => {
     if (email != '' && password != '') {
       e.preventDefault();
@@ -28,14 +37,30 @@ const Login = ({navigation}) => {
         .post('http://192.168.2.92/api/login', formData)
         .then(function (response) {
           console.log(response.data);
+          storeData(response.data);
+          Alert.alert('Success!', 'You are now logged in.', [
+            {
+              text: 'OK',
+              onPress: () => navigation.navigate('Home'),
+            },
+          ]);
         })
         .catch(function (error) {
           if (error.response) {
+            Alert.alert(error.response.data.message, 'Try again!', [
+              {
+                text: 'OK',
+              },
+            ]);
             console.log(error.response.data.message);
           }
         });
     } else {
-      console.log('Fill in values');
+      Alert.alert('Fill in values please', 'Try again!', [
+        {
+          text: 'OK',
+        },
+      ]);
     }
   };
 

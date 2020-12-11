@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -23,12 +24,7 @@ const App = () => {
           name="Home"
           component={HomeScreen}
           options={{
-            title: 'Welcome',
-            headerRight: () => (
-              <Text style={{paddingRight: 20, fontSize: 20, color: '#85bb65'}}>
-                {money}$
-              </Text>
-            ),
+            title: 'Lemonade Webshop',
           }}
         />
         <Stack.Screen

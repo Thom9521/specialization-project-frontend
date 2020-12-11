@@ -11,6 +11,7 @@ import {
   StyleSheet,
   ScrollView,
   ImageBackground,
+  Alert,
 } from 'react-native';
 
 var dimWidth = Dimensions.get('window').width; //full width
@@ -20,6 +21,45 @@ const Signup = ({navigation}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const formData = {name: name, email: email, password: password};
+
+  const handleSubmit = (e) => {
+    if (email != '' && password != '') {
+      if (password == confirmPassword) {
+        e.preventDefault();
+        console.log(formData);
+        axios
+          .post('http://192.168.2.92/api/user-create', formData)
+          .then(function (response) {
+            console.log(response.data);
+            console.log('user created');
+            Alert.alert('Success!', 'Your account has been created!', [
+              {
+                text: 'OK',
+                onPress: () => navigation.navigate('Login'),
+              },
+            ]);
+          })
+          .catch(function (error) {
+            if (error.response) {
+              Alert.alert(error.response.data.message, 'Try again!', [
+                {
+                  text: 'OK',
+                },
+              ]);
+            }
+          });
+      }
+    } else {
+      Alert.alert('Fill in values please', 'Try again!', [
+        {
+          text: 'OK',
+        },
+      ]);
+    }
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -32,7 +72,7 @@ const Signup = ({navigation}) => {
             <TextInput
               style={styles.inputText}
               placeholder="Name..."
-              onChange={(name) => setName(name)}
+              onChangeText={(name) => setName(name)}
             />
           </View>
           <View style={styles.inputView}>
@@ -40,7 +80,7 @@ const Signup = ({navigation}) => {
               style={styles.inputText}
               placeholder="Email..."
               keyboardType="email-address"
-              onChange={(email) => setEmail(email)}
+              onChangeText={(email) => setEmail(email)}
             />
           </View>
           <View style={styles.inputView}>
@@ -48,7 +88,7 @@ const Signup = ({navigation}) => {
               style={styles.inputText}
               placeholder="Password..."
               secureTextEntry={true}
-              onChange={(password) => setPassword(password)}
+              onChangeText={(password) => setPassword(password)}
             />
           </View>
           <View style={styles.inputView}>
@@ -56,12 +96,14 @@ const Signup = ({navigation}) => {
               style={styles.inputText}
               placeholder="Confirm Password..."
               secureTextEntry={true}
-              onChange={(password) => setPassword(password)}
+              onChangeText={(confirmPassword) =>
+                setConfirmPassword(confirmPassword)
+              }
             />
           </View>
         </View>
         <View style={styles.buttonView}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
             <Text style={styles.buttonText}>Signup</Text>
           </TouchableOpacity>
         </View>

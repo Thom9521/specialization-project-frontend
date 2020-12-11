@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 20,
-    color: '#85bb65',
+    color: 'green',
     marginBottom: 10,
   },
   description: {
