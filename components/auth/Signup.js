@@ -26,7 +26,14 @@ const Signup = ({navigation}) => {
   const formData = {name: name, email: email, password: password};
 
   const handleSubmit = (e) => {
-    if (email != '' && password != '') {
+    if (name != '' && email != '' && password != '') {
+      if (password != confirmPassword) {
+        Alert.alert('Your passwords are not the same', 'Try again!', [
+          {
+            text: 'OK',
+          },
+        ]);
+      }
       if (password == confirmPassword) {
         e.preventDefault();
         console.log(formData);
