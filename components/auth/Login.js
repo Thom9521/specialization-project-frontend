@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Dimensions} from 'react-native';
 import axios from 'axios';
 import lemonbackground from '../../assets/lemonbackground3.png';
@@ -36,7 +36,6 @@ const Login = ({navigation}) => {
       axios
         .post('http://192.168.2.92/api/login', formData)
         .then(function (response) {
-          console.log(response.data);
           storeData(response.data);
           Alert.alert('Success!', 'You are now logged in.', [
             {

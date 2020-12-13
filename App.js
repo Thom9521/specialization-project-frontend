@@ -1,31 +1,28 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
+// navigation imports
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
+// components import
 import HomeScreen from './components/HomeScreen';
 import ProductsScreen from './components/products/ProductsScreen';
 import ProductScreen from './components/product/ProductScreen';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
-
 import Theme from './components/Theme';
+
 const Stack = createStackNavigator();
 
-import {Text} from 'react-native';
 const App = () => {
-  const [money, setMoney] = useState(50);
-
   return (
     <NavigationContainer theme={Theme}>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{
-            title: 'Lemonade Webshop',
-          }}
+          options={{title: 'Lemonade Webshop'}}
         />
         <Stack.Screen
           name="ProductsScreen"

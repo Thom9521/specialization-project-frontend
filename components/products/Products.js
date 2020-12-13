@@ -21,9 +21,7 @@ const Products = () => {
     return (
       <View style={styles.container} key={ID}>
         <Text style={styles.name}>{name}</Text>
-        {/* <Text style={styles.price}>{price}$</Text> */}
         <Image source={{uri: imagePath}} style={styles.img} />
-        {/* <Text style={styles.description}>{description}</Text> */}
         <Text style={styles.price}>{price}$</Text>
 
         <TouchableOpacity

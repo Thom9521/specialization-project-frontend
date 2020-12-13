@@ -1,15 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Product from './Product';
 import lemonbackground from '../../assets/lemonbackground3.png';
 
-import {
-  View,
-  Text,
-  Button,
-  Image,
-  StyleSheet,
-  ImageBackground,
-} from 'react-native';
+import {View, StyleSheet, ImageBackground} from 'react-native';
 
 const ProductScreen = ({route, navigation}) => {
   // getting the productID from the route params so i can pass it to the child component through props

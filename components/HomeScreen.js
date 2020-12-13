@@ -31,8 +31,6 @@ const HomeScreen = ({navigation}) => {
             })
             .then((result) => {
               setMe(result.data);
-              console.log(result.data);
-              console.log(me);
             })
             .catch(function (error) {
               if (error.response) {
@@ -67,14 +65,12 @@ const HomeScreen = ({navigation}) => {
         <View style={styles.buttonView}>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('Login', {name: 'LoginPage'})}>
+            onPress={() => navigation.navigate('Login')}>
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
-            onPress={() =>
-              navigation.navigate('ProductsScreen', {name: 'ProductPage'})
-            }>
+            onPress={() => navigation.navigate('ProductsScreen')}>
             <Text style={styles.buttonText}>Products</Text>
           </TouchableOpacity>
         </View>

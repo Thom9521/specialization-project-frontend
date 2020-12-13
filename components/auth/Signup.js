@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Dimensions} from 'react-native';
 import axios from 'axios';
 import lemonbackground from '../../assets/lemonbackground3.png';
@@ -38,10 +38,9 @@ const Signup = ({navigation}) => {
         e.preventDefault();
         console.log(formData);
         axios
-          .post('http://192.168.2.92/api/user-create', formData)
+          .post('http://192.168.2.92/api/users', formData)
           .then(function (response) {
             console.log(response.data);
-            console.log('user created');
             Alert.alert('Success!', 'Your account has been created!', [
               {
                 text: 'OK',

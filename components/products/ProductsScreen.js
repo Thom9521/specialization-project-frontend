@@ -1,11 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Products from './Products';
 import lemonbackground from '../../assets/lemonbackground3.png';
 
 import {
   View,
   Text,
-  Button,
   StyleSheet,
   ScrollView,
   ImageBackground,
