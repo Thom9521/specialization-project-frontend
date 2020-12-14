@@ -16,6 +16,7 @@ const Products = () => {
     };
     fetchProducts();
   }, []);
+
   return products.map((product, index) => {
     const {ID, name, price, imagePath, description} = product; // destructuring
     return (

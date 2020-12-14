@@ -4,7 +4,7 @@ import lemonbackground from '../../assets/lemonbackground3.png';
 
 import {View, StyleSheet, ImageBackground} from 'react-native';
 
-const ProductScreen = ({route, navigation}) => {
+const ProductScreen = ({route}) => {
   // getting the productID from the route params so i can pass it to the child component through props
   const {productID} = route.params;
   return (

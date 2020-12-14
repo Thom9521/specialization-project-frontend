@@ -12,7 +12,7 @@ import {
   Alert,
 } from 'react-native';
 
-const Product = ({navigation, productID}) => {
+const Product = ({productID}) => {
   const [product, setProduct] = useState({});
   const [me, setMe] = useState({email: '', id: '', name: '', money: 0});
   const formData = {money: me.money - product.price};
@@ -44,7 +44,6 @@ const Product = ({navigation, productID}) => {
             .then((result) => {
               setMe(result.data);
               console.log(result.data);
-              console.log(me);
             })
             .catch(function (error) {
               if (error.response) {
@@ -79,7 +78,6 @@ const Product = ({navigation, productID}) => {
     if (me.money - product.price >= 0) {
       updateUser();
       setMe({...me, money: me.money - product.price});
-      console.log(me);
       Alert.alert(
         'Success!',
         `The ${product.name} was bought! \n\nYou new balance is ${
