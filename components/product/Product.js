@@ -75,28 +75,37 @@ const Product = ({productID}) => {
   };
 
   const buyProduct = () => {
-    if (me.money - product.price >= 0) {
-      updateUser();
-      setMe({...me, money: me.money - product.price});
-      Alert.alert(
-        'Success!',
-        `The ${product.name} was bought! \n\nYou new balance is ${
-          me.money - product.price
-        }$`,
-        [
-          {
-            text: 'OK',
-            onPress: () => console.log('Alert closed'),
-          },
-        ],
-      );
-    } else {
-      Alert.alert('Failed', 'You need more money!', [
+    if (me.email === '') {
+      Alert.alert('Failed!', 'You need to be registered to buy products.', [
         {
           text: 'OK',
           onPress: () => console.log('Alert closed'),
         },
       ]);
+    } else {
+      if (me.money - product.price >= 0) {
+        updateUser();
+        setMe({...me, money: me.money - product.price});
+        Alert.alert(
+          'Success!',
+          `The ${product.name} was bought! \n\nYou new balance is ${
+            me.money - product.price
+          }$`,
+          [
+            {
+              text: 'OK',
+              onPress: () => console.log('Alert closed'),
+            },
+          ],
+        );
+      } else {
+        Alert.alert('Failed!', 'You need more money!', [
+          {
+            text: 'OK',
+            onPress: () => console.log('Alert closed'),
+          },
+        ]);
+      }
     }
   };
 
