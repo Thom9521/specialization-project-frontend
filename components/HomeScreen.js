@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import lemonbackground from '../assets/lemonbackground3.png';
 
 import {
   View,
@@ -10,7 +11,6 @@ import {
   StyleSheet,
   ImageBackground,
 } from 'react-native';
-import lemonbackground from '../assets/lemonbackground3.png';
 
 const HomeScreen = ({navigation}) => {
   const [me, setMe] = useState({email: '', id: '', name: '', money: 0});
@@ -18,6 +18,7 @@ const HomeScreen = ({navigation}) => {
   const isFocused = useIsFocused();
   useEffect(() => {
     const getData = async () => {
+      const isMounted = true;
       try {
         const value = await AsyncStorage.getItem('token');
         if (value !== null) {
@@ -31,6 +32,7 @@ const HomeScreen = ({navigation}) => {
             })
             .then((result) => {
               setMe(result.data);
+              AsyncStorage.setItem('userId', me.id.toString());
             })
             .catch(function (error) {
               if (error.response) {

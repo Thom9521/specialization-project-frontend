@@ -11,18 +11,31 @@ import ProductsScreen from './components/products/ProductsScreen';
 import ProductScreen from './components/product/ProductScreen';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
+import CartScreen from './components/cart/CartScreen';
 import Theme from './components/Theme';
+
+import Icon from 'react-native-vector-icons/dist/FontAwesome5';
+import {TouchableOpacity} from 'react-native';
 
 const Stack = createStackNavigator();
 
-const App = () => {
+const App = ({}) => {
   return (
     <NavigationContainer theme={Theme}>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{title: 'Lemonade Webshop'}}
+          options={({navigation}) => ({
+            headerTitle: 'Lemonade Webshop',
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={() => navigation.navigate('CartScreen')}
+                style={{paddingRight: 5}}>
+                <Icon name="shopping-cart" size={30} color="black" />
+              </TouchableOpacity>
+            ),
+          })}
         />
         <Stack.Screen
           name="ProductsScreen"
@@ -43,6 +56,11 @@ const App = () => {
           name="Signup"
           component={Signup}
           options={{title: 'Sign Up'}}
+        />
+        <Stack.Screen
+          name="CartScreen"
+          component={CartScreen}
+          options={{title: 'Cart'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
