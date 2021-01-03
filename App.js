@@ -40,12 +40,30 @@ const App = ({}) => {
         <Stack.Screen
           name="ProductsScreen"
           component={ProductsScreen}
-          options={{title: 'All Products'}}
+          options={({navigation}) => ({
+            headerTitle: 'All Products',
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={() => navigation.navigate('CartScreen')}
+                style={{paddingRight: 5}}>
+                <Icon name="shopping-cart" size={30} color="black" />
+              </TouchableOpacity>
+            ),
+          })}
         />
         <Stack.Screen
           name="ProductScreen"
           component={ProductScreen}
-          options={{title: 'Single Product'}}
+          options={({navigation}) => ({
+            headerTitle: 'Single Product',
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={() => navigation.navigate('CartScreen')}
+                style={{paddingRight: 5}}>
+                <Icon name="shopping-cart" size={30} color="black" />
+              </TouchableOpacity>
+            ),
+          })}
         />
         <Stack.Screen
           name="Login"
