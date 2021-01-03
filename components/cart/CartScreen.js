@@ -4,25 +4,25 @@ import Cart from './Cart';
 import {
   View,
   Text,
-  TouchableOpacity,
+  ScrollView,
   StyleSheet,
   ImageBackground,
 } from 'react-native';
 
 const CartScreen = () => {
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={lemonbackground}
-        style={{width: '100%', height: '100%'}}>
+    <ImageBackground
+      source={lemonbackground}
+      style={{width: '100%', height: '100%'}}>
+      <ScrollView style={styles.container}>
         <View style={styles.titleView}>
           <Text style={styles.welcomeText}>Cart</Text>
         </View>
         <View>
           <Cart />
         </View>
-      </ImageBackground>
-    </View>
+      </ScrollView>
+    </ImageBackground>
   );
 };
 
