@@ -15,7 +15,11 @@ import {
 const Product = ({productID}) => {
   const [product, setProduct] = useState({});
   const [me, setMe] = useState({email: '', id: '', name: '', money: 0});
-  const formData = {money: me.money - product.price};
+  const moneyDecrease = {money: me.money - product.price};
+  const [purchaseInfo, setPurchaseInfo] = useState({
+    userId: '',
+    productId: productID,
+  });
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -43,6 +47,7 @@ const Product = ({productID}) => {
             })
             .then((result) => {
               setMe(result.data);
+              setPurchaseInfo({...purchaseInfo, userId: result.data.id});
               console.log(result.data);
             })
             .catch(function (error) {
@@ -63,7 +68,20 @@ const Product = ({productID}) => {
 
   const updateUser = () => {
     axios
-      .put(`http://192.168.2.92/api/users/${me.id}`, formData)
+      .put(`http://192.168.2.92/api/users/${me.id}`, moneyDecrease)
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response.data.message);
+        }
+      });
+  };
+  const addPurchase = () => {
+    console.log(purchaseInfo);
+    axios
+      .post(`http://192.168.2.92/api/purchases`, purchaseInfo)
       .then(function (response) {
         console.log(response.data);
       })
@@ -85,6 +103,7 @@ const Product = ({productID}) => {
     } else {
       if (me.money - product.price >= 0) {
         updateUser();
+        addPurchase();
         setMe({...me, money: me.money - product.price});
         Alert.alert(
           'Success!',

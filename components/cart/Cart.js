@@ -16,44 +16,44 @@ import {
 const Cart = () => {
   // navigation constant from the useNavigation hook gives acces to the parent navigation object
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
 
   const [products, setProducts] = useState([]);
-  const isFocused = useIsFocused();
 
   useEffect(() => {
     const getData = async () => {
-      try {
-        const value = await AsyncStorage.getItem('userId');
-        if (value !== null) {
-          axios
-            .get(`http://192.168.2.92/api/purchases/${value}`)
-            .then((result) => {
-              setProducts(result.data);
-              console.log(result.data);
-            })
-            .catch(function (error) {
-              if (error.response) {
-                console.log(error.response.data.message);
-              }
-            });
-        } else {
-          console.log('No token in storage');
-        }
-      } catch (e) {
-        console.log('Something went wrong with getting the storage value');
+      const value = await AsyncStorage.getItem('userId');
+      if (value !== null) {
+        console.log('cart: ' + value);
+        axios
+          .get(`http://192.168.2.92/api/purchases/${value}`)
+          .then((result) => {
+            setProducts(result.data);
+            console.log(result.data);
+            console.log('cart fetched');
+          })
+          .catch(function (error) {
+            if (error.response) {
+              console.log(error.response.data.message);
+              console.log('cart ferror');
+            }
+          });
+      } else {
+        console.log('No token in storage');
       }
     };
 
     getData();
-  }, [isFocused]);
+  }, []);
 
   return products.map((product, index) => {
     const {ID, name, price, imagePath, description} = product; // destructuring
     return (
       <TouchableOpacity
+        key={ID}
         onPress={() => navigation.navigate('ProductScreen', {productID: ID})} // passing the ID with params
       >
-        <View style={styles.container} key={ID}>
+        <View style={styles.container}>
           <Text style={styles.name}>{name}</Text>
           <Image source={{uri: imagePath}} style={styles.img} />
         </View>

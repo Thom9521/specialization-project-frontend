@@ -15,6 +15,13 @@ import {
 const HomeScreen = ({navigation}) => {
   const [me, setMe] = useState({email: '', id: '', name: '', money: 0});
 
+  const storeData = async (value) => {
+    try {
+      await AsyncStorage.setItem('userId', value);
+    } catch (e) {
+      // saving error
+    }
+  };
   const isFocused = useIsFocused();
   useEffect(() => {
     const getData = async () => {
@@ -32,7 +39,8 @@ const HomeScreen = ({navigation}) => {
             })
             .then((result) => {
               setMe(result.data);
-              AsyncStorage.setItem('userId', me.id.toString());
+              storeData(result.data.id.toString());
+              console.log('hs: ' + result.data.id.toString());
             })
             .catch(function (error) {
               if (error.response) {
