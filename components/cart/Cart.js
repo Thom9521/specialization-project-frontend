@@ -13,9 +13,11 @@ const Cart = () => {
 
   const [products, setProducts] = useState([]);
   const [amount, setAmount] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
+    setLoading(true);
     const getData = async () => {
       const value = await AsyncStorage.getItem('userId');
       if (value !== null) {
@@ -25,6 +27,7 @@ const Cart = () => {
             if (isMounted) {
               setProducts(result.data[1]);
               setAmount(result.data[0]);
+              setLoading(false);
             }
           })
           .catch(function (error) {
@@ -41,7 +44,13 @@ const Cart = () => {
       isMounted = false;
     };
   }, [isFocused]);
-  if (products.length === 0) {
+  if (loading) {
+    return (
+      <View style={styles.emptyView}>
+        <Text style={styles.emptyText}>Loading...</Text>
+      </View>
+    );
+  } else if (products.length === 0) {
     return (
       <View style={styles.emptyView}>
         <Text style={styles.emptyText}>You haven't bought anything {`:(`}</Text>
