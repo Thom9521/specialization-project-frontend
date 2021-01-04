@@ -20,19 +20,28 @@ const Product = ({productID}) => {
     userId: '',
     productId: productID,
   });
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      const result = await axios(
-        `http://192.168.2.92/api/products/${productID}`, // acessesing the route with the productID props
-      );
-      setProduct(result.data);
-    };
-    fetchProduct();
-  }, []);
-
   const isFocused = useIsFocused();
+
   useEffect(() => {
+    let isMounted = true;
+    const fetchProduct = () => {
+      axios(
+        `http://192.168.2.92/api/products/${productID}`, // acessesing the route with the productID props
+      ).then((result) => {
+        if (isMounted) {
+          setProduct(result.data);
+        }
+      });
+    };
+
+    fetchProduct();
+    return () => {
+      isMounted = false;
+    };
+  }, [isFocused]);
+
+  useEffect(() => {
+    let isMounted = true;
     const getData = async () => {
       try {
         const value = await AsyncStorage.getItem('token');
@@ -46,9 +55,10 @@ const Product = ({productID}) => {
               headers,
             })
             .then((result) => {
-              setMe(result.data);
-              setPurchaseInfo({...purchaseInfo, userId: result.data.id});
-              console.log(result.data);
+              if (isMounted) {
+                setMe(result.data);
+                setPurchaseInfo({...purchaseInfo, userId: result.data.id});
+              }
             })
             .catch(function (error) {
               if (error.response) {
@@ -64,6 +74,9 @@ const Product = ({productID}) => {
     };
 
     getData();
+    return () => {
+      isMounted = false;
+    };
   }, [isFocused]);
 
   const updateUser = () => {

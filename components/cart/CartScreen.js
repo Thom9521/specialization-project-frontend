@@ -18,7 +18,7 @@ const CartScreen = () => {
         <View style={styles.titleView}>
           <Text style={styles.welcomeText}>Cart</Text>
         </View>
-        <View>
+        <View style={styles.cartView}>
           <Cart />
         </View>
       </ScrollView>
@@ -36,6 +36,9 @@ const styles = StyleSheet.create({
   welcomeText: {
     fontSize: 36,
     color: 'black',
+  },
+  cartView: {
+    paddingTop: '5%',
   },
 });
 

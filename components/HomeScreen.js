@@ -15,6 +15,8 @@ import {
 const HomeScreen = ({navigation}) => {
   const [me, setMe] = useState({email: '', id: '', name: '', money: 0});
 
+  const isFocused = useIsFocused();
+
   const storeData = async (value) => {
     try {
       await AsyncStorage.setItem('userId', value);
@@ -22,10 +24,9 @@ const HomeScreen = ({navigation}) => {
       // saving error
     }
   };
-  const isFocused = useIsFocused();
   useEffect(() => {
+    let isMounted = true;
     const getData = async () => {
-      const isMounted = true;
       try {
         const value = await AsyncStorage.getItem('token');
         if (value !== null) {
@@ -38,9 +39,10 @@ const HomeScreen = ({navigation}) => {
               headers,
             })
             .then((result) => {
-              setMe(result.data);
-              storeData(result.data.id.toString());
-              console.log('hs: ' + result.data.id.toString());
+              if (isMounted) {
+                setMe(result.data);
+                storeData(result.data.id.toString());
+              }
             })
             .catch(function (error) {
               if (error.response) {
@@ -56,6 +58,9 @@ const HomeScreen = ({navigation}) => {
     };
 
     getData();
+    return () => {
+      isMounted = false;
+    };
   }, [isFocused]);
 
   return (
