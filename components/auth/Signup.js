@@ -28,7 +28,7 @@ const Signup = ({navigation}) => {
   const handleSubmit = (e) => {
     if (name != '' && email != '' && password != '') {
       if (password != confirmPassword) {
-        Alert.alert('Your passwords are not the same', 'Try again!', [
+        Alert.alert('Try again!', 'Your passwords do not match!', [
           {
             text: 'OK',
           },
@@ -50,7 +50,13 @@ const Signup = ({navigation}) => {
           })
           .catch(function (error) {
             if (error.response) {
-              Alert.alert(error.response.data.message, 'Try again!', [
+              var errorMessage = '';
+              if (error.response.data.errors.email) {
+                errorMessage = error.response.data.errors.email.toString();
+              } else if (error.response.data.errors.password) {
+                errorMessage = error.response.data.errors.password.toString();
+              }
+              Alert.alert('Try again!', errorMessage, [
                 {
                   text: 'OK',
                 },
@@ -59,7 +65,7 @@ const Signup = ({navigation}) => {
           });
       }
     } else {
-      Alert.alert('Fill in values please', 'Try again!', [
+      Alert.alert('Try again!', 'Fill in values please', [
         {
           text: 'OK',
         },
@@ -71,7 +77,7 @@ const Signup = ({navigation}) => {
     <ScrollView style={styles.container}>
       <ImageBackground source={lemonbackground} style={styles.backgroundImage}>
         <View style={styles.titleView}>
-          <Text style={styles.welcomeText}>Signup</Text>
+          <Text style={styles.welcomeText}>Sign Up</Text>
         </View>
         <View style={styles.inputViews}>
           <View style={styles.inputView}>
@@ -110,7 +116,7 @@ const Signup = ({navigation}) => {
         </View>
         <View style={styles.buttonView}>
           <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            <Text style={styles.buttonText}>Signup</Text>
+            <Text style={styles.buttonText}>Sign Up</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>

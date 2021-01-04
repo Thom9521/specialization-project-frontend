@@ -18,7 +18,8 @@ const Product = ({productID}) => {
   const moneyDecrease = {money: me.money - product.price};
   const [purchaseInfo, setPurchaseInfo] = useState({
     userId: '',
-    productId: productID,
+    productId: '',
+    // productId: productID,
   });
   const isFocused = useIsFocused();
 
@@ -30,6 +31,10 @@ const Product = ({productID}) => {
       ).then((result) => {
         if (isMounted) {
           setProduct(result.data);
+          setPurchaseInfo((prevState) => ({
+            ...prevState,
+            productId: productID,
+          }));
         }
       });
     };
@@ -57,7 +62,11 @@ const Product = ({productID}) => {
             .then((result) => {
               if (isMounted) {
                 setMe(result.data);
-                setPurchaseInfo({...purchaseInfo, userId: result.data.id});
+
+                setPurchaseInfo((prevState) => ({
+                  ...prevState,
+                  userId: result.data.id,
+                }));
               }
             })
             .catch(function (error) {
@@ -93,6 +102,7 @@ const Product = ({productID}) => {
   };
   const addPurchase = () => {
     console.log(purchaseInfo);
+
     axios
       .post(`http://192.168.2.92/api/purchases`, purchaseInfo)
       .then(function (response) {

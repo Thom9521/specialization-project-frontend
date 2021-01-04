@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
+  Alert,
 } from 'react-native';
 
 const HomeScreen = ({navigation}) => {
@@ -17,13 +18,22 @@ const HomeScreen = ({navigation}) => {
 
   const isFocused = useIsFocused();
 
-  const storeData = async (value) => {
+  const storeUserId = async (value) => {
     try {
       await AsyncStorage.setItem('userId', value);
     } catch (e) {
       // saving error
     }
   };
+
+  const storeToken = async (value) => {
+    try {
+      await AsyncStorage.setItem('token', value);
+    } catch (e) {
+      // saving error
+    }
+  };
+
   useEffect(() => {
     let isMounted = true;
     const getData = async () => {
@@ -41,7 +51,7 @@ const HomeScreen = ({navigation}) => {
             .then((result) => {
               if (isMounted) {
                 setMe(result.data);
-                storeData(result.data.id.toString());
+                storeUserId(result.data.id.toString());
               }
             })
             .catch(function (error) {
@@ -63,6 +73,18 @@ const HomeScreen = ({navigation}) => {
     };
   }, [isFocused]);
 
+  const logout = () => {
+    storeToken('');
+    storeUserId('');
+    setMe({email: '', id: '', name: '', money: 0});
+    Alert.alert('Success!', 'You are now logged out.', [
+      {
+        text: 'OK',
+        onPress: () => navigation.navigate('Home'),
+      },
+    ]);
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -76,13 +98,23 @@ const HomeScreen = ({navigation}) => {
               <Text style={styles.priceText}>{me.money}$</Text>
             </Text>
           )}
+          {me.name === '' && (
+            <Text style={styles.moneyText}>Login to see your balance</Text>
+          )}
         </View>
         <View style={styles.buttonView}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('Login')}>
-            <Text style={styles.buttonText}>Login</Text>
-          </TouchableOpacity>
+          {me.name === '' && (
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate('Login')}>
+              <Text style={styles.buttonText}>Login</Text>
+            </TouchableOpacity>
+          )}
+          {me.name != '' && (
+            <TouchableOpacity style={styles.button} onPress={logout}>
+              <Text style={styles.buttonText}>Logout</Text>
+            </TouchableOpacity>
+          )}
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('ProductsScreen')}>

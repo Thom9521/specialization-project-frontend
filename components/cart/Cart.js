@@ -7,7 +7,7 @@ import {useNavigation} from '@react-navigation/native';
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 
 const Cart = () => {
-  // navigation constant from the useNavigation hook gives acces to the parent navigation object
+  // the navigation const from the useNavigation hook gives access to the parent navigation object
   const navigation = useNavigation();
   const isFocused = useIsFocused();
 
@@ -41,24 +41,30 @@ const Cart = () => {
       isMounted = false;
     };
   }, [isFocused]);
-
-  return products.map((product, index) => {
-    const {ID, name, price, imagePath, description} = product; // destructuring
+  if (products.length === 0) {
     return (
-      <TouchableOpacity
-        key={ID}
-        onPress={() => navigation.navigate('ProductScreen', {productID: ID})} // passing the ID with params
-      >
-        <View style={styles.container}>
-          {/* <Text style={styles.amount}>{amount[ID]}</Text> */}
-          <Text style={styles.name}>
-            {name}({amount[ID]})
-          </Text>
-          <Image source={{uri: imagePath}} style={styles.img} />
-        </View>
-      </TouchableOpacity>
+      <View style={styles.emptyView}>
+        <Text style={styles.emptyText}>You haven't bought anything {`:(`}</Text>
+      </View>
     );
-  });
+  } else {
+    return products.map((product, index) => {
+      const {ID, name, price, imagePath, description} = product; // destructuring
+      return (
+        <TouchableOpacity
+          key={ID}
+          onPress={() => navigation.navigate('ProductScreen', {productID: ID})} // passing the ID with params
+        >
+          <View style={styles.container}>
+            <Text style={styles.name}>
+              {name}({amount[ID]})
+            </Text>
+            <Image source={{uri: imagePath}} style={styles.img} />
+          </View>
+        </TouchableOpacity>
+      );
+    });
+  }
 };
 
 const styles = StyleSheet.create({
@@ -80,6 +86,11 @@ const styles = StyleSheet.create({
     borderRadius: 150 / 2,
   },
   amount: {fontWeight: 'bold', fontSize: 16},
+  emptyView: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  emptyText: {fontWeight: 'bold', fontSize: 20},
 });
 
 export default Cart;

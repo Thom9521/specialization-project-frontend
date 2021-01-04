@@ -23,7 +23,7 @@ const Login = ({navigation}) => {
 
   const formData = {email: email, password: password};
 
-  const storeData = async (value) => {
+  const storeToken = async (value) => {
     try {
       await AsyncStorage.setItem('token', value);
     } catch (e) {
@@ -36,7 +36,7 @@ const Login = ({navigation}) => {
       axios
         .post('http://192.168.2.92/api/login', formData)
         .then(function (response) {
-          storeData(response.data);
+          storeToken(response.data);
           Alert.alert('Success!', 'You are now logged in.', [
             {
               text: 'OK',
@@ -46,7 +46,7 @@ const Login = ({navigation}) => {
         })
         .catch(function (error) {
           if (error.response) {
-            Alert.alert(error.response.data.message, 'Try again!', [
+            Alert.alert('Try again!', error.response.data.message, [
               {
                 text: 'OK',
               },
@@ -55,7 +55,7 @@ const Login = ({navigation}) => {
           }
         });
     } else {
-      Alert.alert('Fill in values please', 'Try again!', [
+      Alert.alert('Try again!', 'Fill in values please', [
         {
           text: 'OK',
         },

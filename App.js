@@ -12,10 +12,8 @@ import ProductScreen from './components/product/ProductScreen';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 import CartScreen from './components/cart/CartScreen';
+import CartBtn from './components/cart/CartBtn';
 import Theme from './components/Theme';
-
-import Icon from 'react-native-vector-icons/dist/FontAwesome5';
-import {TouchableOpacity} from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -26,44 +24,26 @@ const App = ({}) => {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={({navigation}) => ({
+          options={{
             headerTitle: 'Lemonade Webshop',
-            headerRight: () => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate('CartScreen')}
-                style={{paddingRight: 5}}>
-                <Icon name="shopping-cart" size={30} color="black" />
-              </TouchableOpacity>
-            ),
-          })}
+            headerRight: () => <CartBtn />,
+          }}
         />
         <Stack.Screen
           name="ProductsScreen"
           component={ProductsScreen}
-          options={({navigation}) => ({
+          options={{
             headerTitle: 'All Products',
-            headerRight: () => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate('CartScreen')}
-                style={{paddingRight: 5}}>
-                <Icon name="shopping-cart" size={30} color="black" />
-              </TouchableOpacity>
-            ),
-          })}
+            headerRight: () => <CartBtn />,
+          }}
         />
         <Stack.Screen
           name="ProductScreen"
           component={ProductScreen}
-          options={({navigation}) => ({
+          options={{
             headerTitle: 'Single Product',
-            headerRight: () => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate('CartScreen')}
-                style={{paddingRight: 5}}>
-                <Icon name="shopping-cart" size={30} color="black" />
-              </TouchableOpacity>
-            ),
-          })}
+            headerRight: () => <CartBtn />,
+          }}
         />
         <Stack.Screen
           name="Login"
