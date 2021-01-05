@@ -11,12 +11,10 @@ import {
 
 const CartScreen = () => {
   return (
-    <ImageBackground
-      source={lemonbackground}
-      style={{width: '100%', height: '100%'}}>
+    <ImageBackground source={lemonbackground} style={styles.background}>
       <ScrollView style={styles.container}>
         <View style={styles.titleView}>
-          <Text style={styles.welcomeText}>Cart</Text>
+          <Text style={styles.titleText}>Cart</Text>
         </View>
         <View style={styles.cartView}>
           <Cart />
@@ -30,10 +28,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  background: {
+    width: '100%',
+    height: '100%',
+  },
   titleView: {
     alignItems: 'center',
   },
-  welcomeText: {
+  titleText: {
     fontSize: 36,
     color: 'black',
   },

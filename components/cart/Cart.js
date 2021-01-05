@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import {useIsFocused} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import {useNavigation} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 
 const Cart = () => {
   // the navigation const from the useNavigation hook gives access to the parent navigation object
   const navigation = useNavigation();
+  // used to re-render the screen when it's highlighted
   const isFocused = useIsFocused();
 
   const [products, setProducts] = useState([]);
@@ -44,6 +44,7 @@ const Cart = () => {
       isMounted = false;
     };
   }, [isFocused]);
+
   if (loading) {
     return (
       <View style={styles.emptyView}>
@@ -66,6 +67,7 @@ const Cart = () => {
         >
           <View style={styles.container}>
             <Text style={styles.name}>
+              {/* using ID from products to pick the key from the amount array to get the right value */}
               {name}({amount[ID]})
             </Text>
             <Image source={{uri: imagePath}} style={styles.img} />
@@ -94,12 +96,14 @@ const styles = StyleSheet.create({
     height: 70,
     borderRadius: 150 / 2,
   },
-  amount: {fontWeight: 'bold', fontSize: 16},
   emptyView: {
     alignItems: 'center',
     justifyContent: 'center',
   },
-  emptyText: {fontWeight: 'bold', fontSize: 20},
+  emptyText: {
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
 });
 
 export default Cart;

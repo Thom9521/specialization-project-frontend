@@ -19,7 +19,6 @@ const Product = ({productID}) => {
   const [purchaseInfo, setPurchaseInfo] = useState({
     userId: '',
     productId: '',
-    // productId: productID,
   });
   const isFocused = useIsFocused();
 
