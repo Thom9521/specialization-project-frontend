@@ -11,8 +11,8 @@ import ProductsScreen from './components/products/ProductsScreen';
 import ProductScreen from './components/product/ProductScreen';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
-import CartScreen from './components/cart/CartScreen';
-import CartBtn from './components/cart/CartBtn';
+import ReceiptScreen from './components/receipt/ReceiptScreen';
+import ReceiptBtn from './components/receipt/ReceiptBtn';
 import Theme from './components/Theme';
 
 const Stack = createStackNavigator();
@@ -26,7 +26,7 @@ const App = ({}) => {
           component={HomeScreen}
           options={{
             headerTitle: 'Lemonade Webshop',
-            headerRight: () => <CartBtn />,
+            headerRight: () => <ReceiptBtn />,
           }}
         />
         <Stack.Screen
@@ -34,7 +34,7 @@ const App = ({}) => {
           component={ProductsScreen}
           options={{
             headerTitle: 'All Products',
-            headerRight: () => <CartBtn />,
+            headerRight: () => <ReceiptBtn />,
           }}
         />
         <Stack.Screen
@@ -42,7 +42,7 @@ const App = ({}) => {
           component={ProductScreen}
           options={{
             headerTitle: 'Single Product',
-            headerRight: () => <CartBtn />,
+            headerRight: () => <ReceiptBtn />,
           }}
         />
         <Stack.Screen
@@ -56,9 +56,9 @@ const App = ({}) => {
           options={{title: 'Sign Up'}}
         />
         <Stack.Screen
-          name="CartScreen"
-          component={CartScreen}
-          options={{title: 'Cart'}}
+          name="ReceiptScreen"
+          component={ReceiptScreen}
+          options={{title: 'Receipt'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

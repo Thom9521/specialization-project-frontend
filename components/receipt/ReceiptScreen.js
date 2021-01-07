@@ -1,6 +1,6 @@
 import React from 'react';
 import lemonbackground from '../../assets/lemonbackground3.png';
-import Cart from './Cart';
+import Receipt from './Receipt';
 import {
   View,
   Text,
@@ -9,15 +9,15 @@ import {
   ImageBackground,
 } from 'react-native';
 
-const CartScreen = () => {
+const ReceiptScreen = () => {
   return (
     <ImageBackground source={lemonbackground} style={styles.background}>
       <ScrollView style={styles.container}>
         <View style={styles.titleView}>
-          <Text style={styles.titleText}>Cart</Text>
+          <Text style={styles.titleText}>Receipt</Text>
         </View>
-        <View style={styles.cartView}>
-          <Cart />
+        <View style={styles.receiptView}>
+          <Receipt />
         </View>
       </ScrollView>
     </ImageBackground>
@@ -39,9 +39,9 @@ const styles = StyleSheet.create({
     fontSize: 36,
     color: 'black',
   },
-  cartView: {
+  receiptView: {
     paddingTop: '5%',
   },
 });
 
-export default CartScreen;
+export default ReceiptScreen;

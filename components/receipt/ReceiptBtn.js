@@ -5,7 +5,7 @@ import {useNavigation} from '@react-navigation/native';
 import {View, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome5';
 
-const CartBtn = () => {
+const ReceiptBtn = () => {
   // the navigation const from the useNavigation hook gives access to the parent navigation object
   const navigation = useNavigation();
 
@@ -21,13 +21,13 @@ const CartBtn = () => {
     <View>
       {token != null && (
         <TouchableOpacity
-          onPress={() => navigation.navigate('CartScreen')}
+          onPress={() => navigation.navigate('ReceiptScreen')}
           style={{paddingRight: 5}}>
-          <Icon name="shopping-cart" size={30} color="black" />
+          <Icon name="receipt" size={30} color="black" />
         </TouchableOpacity>
       )}
     </View>
   );
 };
 
-export default CartBtn;
+export default ReceiptBtn;

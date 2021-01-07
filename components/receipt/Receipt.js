@@ -5,7 +5,7 @@ import {useIsFocused, useNavigation} from '@react-navigation/native';
 
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 
-const Cart = () => {
+const Receipt = () => {
   // the navigation const from the useNavigation hook gives access to the parent navigation object
   const navigation = useNavigation();
   // used to re-render the screen when it's highlighted
@@ -106,4 +106,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Cart;
+export default Receipt;
