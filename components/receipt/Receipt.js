@@ -36,7 +36,7 @@ const Receipt = () => {
             }
           });
       } else {
-        console.log('No token in storage');
+        console.log('No userId in storage');
       }
     };
     getData();

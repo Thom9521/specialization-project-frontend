@@ -100,8 +100,6 @@ const Product = ({productID}) => {
       });
   };
   const addPurchase = () => {
-    console.log(purchaseInfo);
-
     axios
       .post(`http://192.168.2.92/api/purchases`, purchaseInfo)
       .then(function (response) {
